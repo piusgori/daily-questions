@@ -34,6 +34,10 @@ const ProfileScreen = ({ navigation }) => {
                     <Title style={styles.detailsText}>Current Points</Title>
                     <Text style={styles.text}>{user.points}</Text>
                 </View>
+                <View style={styles.bottomEachView}>
+                    <Title style={styles.detailsText}>Points Worth</Title>
+                    <Text style={styles.text}>${user.points * 0.001}</Text>
+                </View>
             </View>
             <Pressable onPress={() => {navigation.navigate('RequestWithdrawal')}} android_ripple={{color: '#ccc'}} style={styles.button}>
                 <Text style={styles.buttonText}>Request Withdrawal</Text>

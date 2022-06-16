@@ -43,7 +43,7 @@ const Card = ({ question }) => {
                     email: user.email,
                     id: user.id,
                     token: user.token,
-                    points: (user.points + 3),
+                    points: (user.points + 5),
                     questionsAnswered: updatedArrayOfAnsweredQuestions
                 };
                  const updatedQuestion = {
@@ -93,7 +93,7 @@ const Card = ({ question }) => {
                         email: user.email,
                         id: user.id,
                         token: user.token,
-                        points: (user.points + 3),
+                        points: (user.points + 5),
                         questionsAnswered: updatedArrayOfAnsweredQuestions
                     };
                     const updatedQuestion = {
