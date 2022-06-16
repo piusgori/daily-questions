@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "everyday-knowledge-gain",
-    "slug": "everyday-knowledge-gain",
+    "name": "Intelligain: Answer Questions Gain Cash",
+    "slug": "intelligain-answer-questions-gain-cash",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/main-logo-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/loading_background_image.png",
+      "image": "./assets/logo-icon.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/main-logo-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },

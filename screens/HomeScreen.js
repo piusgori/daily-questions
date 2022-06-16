@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, ImageBackground, Pressable, FlatList } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ImageBackground, Pressable, VirtualizedList } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import { CATEGORIES } from '../utils/categories';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +12,7 @@ const HomeScreen = ({ navigation }) => {
     const { questions, isLoading, errors, getQuestions } = useContext(QuestionsContext);
 
     const keyExtract = (item) => (item.id);
+    const getItem = (data, index) => {return data[index]};
     const showQuestions = (itemData) => (<Card question={itemData.item}></Card>);
     const goToCategoriesHandler = () => { navigation.navigate('CategoriesTabScreen') };
     const topCategories = CATEGORIES.filter((category) => CATEGORIES.indexOf(category) < 5);
@@ -51,13 +52,16 @@ const HomeScreen = ({ navigation }) => {
                 <LottieView style={styles.animation} autoPlay={true} loop={true} resizeMode='cover' key='animation' source={require('../assets/loading.json')}></LottieView>
             </View>}
                 {!isLoading && questions.length === 0 && <Title>There are questions added yet</Title>}
-              {!isLoading && questions.length > 0 && <FlatList
+              {!isLoading && questions.length > 0 && <VirtualizedList
                 data={popularQuestions}
+                initialNumToRender={2}
                 keyExtractor={keyExtract}
                 renderItem={showQuestions}
+                getItemCount={data => data.length}
+                getItem={getItem}
                 showsVerticalScrollIndicator={false}
               >
-              </FlatList>}
+              </VirtualizedList>}
           </View>
       </View>
     </View>

@@ -126,7 +126,7 @@ export const AuthenticationContextProvider = ({ children }) => {
             }).then(databaseResponse => {
                 return databaseResponse.json();
             }).then(databaseResponseData => {
-                const newUser = {name, email, questionsAnswered: [], points: 0, token: responseData.idToken};
+                const newUser = {name, email, questionsAnswered: [], points: 0, token: responseData.idToken, id: databaseResponseData.name};
                 setUser(newUser);
                 saveUser(newUser);
                 setIsLoading(false);
@@ -136,6 +136,19 @@ export const AuthenticationContextProvider = ({ children }) => {
         }).catch(err => {
             setIsLoading(false);
         })
+    }
+
+    const updateUserCredentials = (name) => {
+        setIsLoading(true);
+        setErrors(null);
+        if(name.length === 0){
+            setIsLoading(false);
+            return setErrors('You cannot update to no name!');
+        }
+        const userToSend = user;
+        userToSend.name = name;
+        updateUser(user.id, userToSend);
+        setIsLoading(false);
     }
 
     const updateUser = (id, data) => {
@@ -152,7 +165,7 @@ export const AuthenticationContextProvider = ({ children }) => {
                 return setErrors('An unexpected error occured')
             }
             setUser(data);
-            saveUser(data)
+            saveUser(data);
         }).catch(err => {
             console.log(err);
         })
@@ -163,7 +176,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         removeUser();
     }
 
-    const value = {user, isLoading, errors, loginHandler, logoutHandler, registerHandler, firstTimeLoading, updateUser }
+    const value = {updateUserCredentials, user, isLoading, errors, loginHandler, logoutHandler, registerHandler, firstTimeLoading, updateUser }
 
     return(
         <AuthenticationContext.Provider value={value}>{children}</AuthenticationContext.Provider>

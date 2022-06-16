@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from 'react-native'
+import { View, StyleSheet, VirtualizedList } from 'react-native'
 import React, { useLayoutEffect, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Card from '../components/Card';
@@ -16,6 +16,7 @@ const CategoryQuestionsScreen = ({ route }) => {
   }, []);
 
   const categoryQuestions = questions.filter((question) => question.category === route.params.categoryName);
+  const getItem = (data, index) => {return data[index]};
   const keyExtract = (item) => (item.id);
   const showQuestions = (itemData) => (<Card question={itemData.item}></Card>);
 
@@ -25,12 +26,15 @@ const CategoryQuestionsScreen = ({ route }) => {
           <LottieView style={styles.animation} autoPlay={true} loop={true} resizeMode='cover' key='animation' source={require('../assets/loading.json')}></LottieView>
       </View>}
       {!isLoading && categoryQuestions.length === 0 && <Title>There are no questions for this category yet</Title>}
-      {!isLoading && categoryQuestions.length > 0 && <FlatList
+      {!isLoading && categoryQuestions.length > 0 && <VirtualizedList
         data={categoryQuestions}
+        initialNumToRender={2}
         keyExtractor={keyExtract}
         renderItem={showQuestions}
+        getItemCount={data => data.length}
+        getItem={getItem}
         showsVerticalScrollIndicator={false}
-      ></FlatList>}
+      ></VirtualizedList>}
     </View>
   )
 }

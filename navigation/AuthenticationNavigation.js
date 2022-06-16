@@ -4,10 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Account from '../screens/authentication/Account';
 import LoginScreen from '../screens/authentication/LoginScreen';
 import RegisterScreen from '../screens/authentication/RegisterScreen';
+import ExitApp from '../utils/exit-app';
 
 const Stack = createNativeStackNavigator();
 
 const AuthenticationNavigation = () => {
+    ExitApp();
+
   return (
     <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>

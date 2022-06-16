@@ -1,52 +1,28 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-import React, { useState } from 'react'
-import { TextInput } from 'react-native-paper'
+import React, { useState, useContext } from 'react'
+import { TextInput, ActivityIndicator } from 'react-native-paper'
+import { AuthenticationContext } from '../services/authentication/authentication-context'
 
 const EditProfileScreen = () => {
-  const [isOldPasswordHidden, setIsOldPasswordHidden] = useState(true);
-  const [isOldPasswordVisible, setIsOldPasswordVisible] = useState('eye');
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const [isPasswordVisible, setIsPasswordVisible] = useState('eye');
-  const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] = useState(true);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState('eye');
+  const { isLoading, errors, updateUserCredentials } = useContext(AuthenticationContext);
 
-  const changePasswordVisibilityHandler = () => {
-    setIsPasswordHidden(!isPasswordHidden);
-    if(!isPasswordHidden){
-      setIsPasswordVisible('eye');
-    } else {
-      setIsPasswordVisible('eye-off');
-    }
-  };
+  const [nameInput, setNameInput] = useState('');
+  const [firstTimeLoading, setFirstTimeLoading] = useState(true);
 
-  const changeOldPasswordVisibilityHandler = () => {
-    setIsOldPasswordHidden(!isOldPasswordHidden);
-    if(!isOldPasswordHidden){
-      setIsOldPasswordVisible('eye');
-    } else {
-      setIsOldPasswordVisible('eye-off');
-    }
-  };
-
-  const changeConfirmPasswordVisibilityHandler = () => {
-    setIsConfirmPasswordHidden(!isConfirmPasswordHidden);
-    if(!isConfirmPasswordHidden){
-      setIsConfirmPasswordVisible('eye')
-    } else {
-      setIsConfirmPasswordVisible('eye-off');
-    }
+  const submitUpdatedCredentials = () => {
+    setFirstTimeLoading(false);
+    updateUserCredentials(nameInput);
   }
 
 
   return (
     <View style={styles.rootContainer}>
       <View style={styles.container}>
-        <TextInput style={styles.input} label='Name' textContentType='name' keyboardType='default' autoCapitalize='words'></TextInput>
-        <TextInput style={styles.input} label='E-Mail' textContentType='emailAddress' keyboardType='email-address' autoCapitalize='none'></TextInput>
-        <TextInput style={styles.input} label='Old Password' textContentType='password' secureTextEntry={isOldPasswordHidden} autoCapitalize='none' right={<TextInput.Icon name={isOldPasswordVisible} onPress={changeOldPasswordVisibilityHandler}></TextInput.Icon>}></TextInput>
-        <TextInput style={styles.input} label='New Password' textContentType='password' secureTextEntry={isPasswordHidden} autoCapitalize='none' right={<TextInput.Icon name={isPasswordVisible} onPress={changePasswordVisibilityHandler}></TextInput.Icon>}></TextInput>
-        <TextInput style={styles.input} label='Confirm Password' textContentType='password' secureTextEntry={isConfirmPasswordHidden} autoCapitalize='none' right={<TextInput.Icon name={isConfirmPasswordVisible} onPress={changeConfirmPasswordVisibilityHandler}></TextInput.Icon>}></TextInput>
-        <Pressable android_ripple={{color: '#CCC'}} style={styles.button}><Text style={styles.buttonText}>Update</Text></Pressable>
+        <TextInput onChangeText={(input) => {setNameInput(input)}} value={nameInput} style={styles.input} label='Name' textContentType='name' keyboardType='default' autoCapitalize='words'></TextInput>
+        {!firstTimeLoading && !isLoading && !errors && <Text style={[styles.errortext, styles.successText]}>Your name has been updated successfully</Text>}
+        {!firstTimeLoading && !isLoading && errors && <Text style={styles.errortext}>{errors}</Text>}
+        {!isLoading && <Pressable onPress={submitUpdatedCredentials} android_ripple={{color: '#CCC'}} style={styles.button}><Text style={styles.buttonText}>Update</Text></Pressable>}
+        {isLoading && <ActivityIndicator size={30}></ActivityIndicator>}
       </View>
     </View>
   )
@@ -56,7 +32,7 @@ export default EditProfileScreen;
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 12,
+    marginVertical: 12,
     width: '60%',
     paddingHorizontal: 24,
     paddingVertical: 8,
@@ -78,6 +54,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     elevation: 5
+  },
+  errortext: {
+    color: 'red',
+    marginVertical: 10,
+    fontSize: 16,
+    fontFamily: 'prata',
+    textTransform: 'capitalize'
+  },
+  successText: {
+    color: 'green',
   },
   input: {
     marginVertical: 10,

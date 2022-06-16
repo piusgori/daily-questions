@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, Alert } from 'react-native';
 import React, { useContext } from 'react';
 import { baseStyles } from '../utils/styles';
 import Title from '../components/Title';
@@ -8,7 +8,29 @@ import { AuthenticationContext } from '../services/authentication/authentication
 const ProfileScreen = ({ navigation }) => {
 
     const authenticationContext = useContext(AuthenticationContext);
-    const { user } = authenticationContext;
+    const { user, updateUser } = authenticationContext;
+
+    const webViewNavigationHandler = () => {
+        const { email, id, name, token } = user;
+        const updateUserWithoutPoints = { name, email, id, token, points: 0, questionsAnswered: []};
+        navigation.navigate('RequestWithdrawal');
+        updateUser(id, updateUserWithoutPoints);
+    }
+
+    const withdrawalRequestHandler = () => {
+        if(user.points < 5000){
+            return Alert.alert('Insufficient Points', 'Your points are not enough for withdrawal. You must reach 10000 points in order to withdraw cash!');
+        }
+        Alert.alert(
+            'Caution',
+            'You are about to make a withdrawal request. Once you accept your points will be reset. You can cancel if you want to continue gaining',
+            [
+                {text: 'Cancel', style: 'cancel'},
+                {text: 'Proceed', onPress: webViewNavigationHandler}
+            ],
+            {cancelable: true}
+        )
+    }
 
   return (
     <View style={styles.rootContainer}>
@@ -36,10 +58,10 @@ const ProfileScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.bottomEachView}>
                     <Title style={styles.detailsText}>Points Worth</Title>
-                    <Text style={styles.text}>${user.points * 0.001}</Text>
+                    <Text style={styles.text}>${(user.points * 0.001).toFixed(3)}</Text>
                 </View>
             </View>
-            <Pressable onPress={() => {navigation.navigate('RequestWithdrawal')}} android_ripple={{color: '#ccc'}} style={styles.button}>
+            <Pressable onPress={withdrawalRequestHandler} android_ripple={{color: '#ccc'}} style={styles.button}>
                 <Text style={styles.buttonText}>Request Withdrawal</Text>
             </Pressable>
         </View>

@@ -12,6 +12,7 @@ const SetingsScreen = ({ navigation }) => {
 
   const goToHomeHandler = () => {navigation.navigate('HomeTabScreen')}
   const goToProfileHandler = () => {navigation.navigate('Profile')}
+  const goToAboutHandler = () => {navigation.navigate('AboutScreen')};
 
   return (
     <ImageBackground style={styles.background} source={{uri: 'https://cdn.pixabay.com/photo/2020/03/30/14/34/mountains-4984418__340.png'}}>
@@ -22,6 +23,7 @@ const SetingsScreen = ({ navigation }) => {
         <View style={styles.optionsMenu}>
           <Pressable onPress={goToHomeHandler} android_ripple={{color: '#CCC'}} style={styles.eachOtpionView}><Ionicons name='home' size={20}></Ionicons><Text style={styles.text}>Home</Text></Pressable>
           <Pressable onPress={goToProfileHandler} android_ripple={{color: '#CCC'}} style={styles.eachOtpionView}><Ionicons name='person' size={20}></Ionicons><Text style={styles.text}>Profile</Text></Pressable>
+          <Pressable onPress={goToAboutHandler} android_ripple={{color: '#CCC'}} style={styles.eachOtpionView}><Ionicons name='md-information-circle' size={20}></Ionicons><Text style={styles.text}>About</Text></Pressable>
           <Pressable onPress={logoutHandler} android_ripple={{color: '#CCC'}} style={styles.eachOtpionView}><Ionicons name='md-log-out' size={20}></Ionicons><Text style={styles.text}>Logout</Text></Pressable>
         </View>
       </View>

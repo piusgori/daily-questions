@@ -7,10 +7,15 @@ import CategoryQuestionsScreen from '../screens/CategoryQuestionsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import WithdrawalScreen from '../screens/WithdrawalScreen';
+import AboutScreen from '../screens/AboutScreen';
+import ExitApp from '../utils/exit-app';
 
 const Stack = createNativeStackNavigator();
 
 const QuestionsStackNavigation = () => {
+
+  ExitApp();
+
   return (
     <NavigationContainer>
         <Stack.Navigator
@@ -40,6 +45,12 @@ const QuestionsStackNavigation = () => {
               component={WithdrawalScreen}
               options={{title: 'Request Withdrawal'}}
             ></Stack.Screen>
+            <Stack.Screen
+              name='AboutScreen'
+              component={AboutScreen}
+              options={{title: 'About'}}
+            >
+            </Stack.Screen>
         </Stack.Navigator>
     </NavigationContainer>
   )
