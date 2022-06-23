@@ -57,7 +57,7 @@ const Card = ({ question }) => {
                  }
                 updateUser(user.id, updatedUser)
                 updateQuestion(question.id, updatedQuestion)
-                Alert.alert('Congratulations', 'You Have picked the correct answer. You have been awarded 3 points');
+                Alert.alert('Congratulations', 'You Have picked the correct answer. You have been awarded 5 points');
             }
         } else {
             const alreadyAnsweredQuestion = user.questionsAnswered.find((answered) => question.id === answered);
@@ -107,7 +107,7 @@ const Card = ({ question }) => {
                     }
                     updateUser(user.id, updatedUser)
                     updateQuestion(question.id, updatedQuestion)
-                    Alert.alert('Congratulations', 'You Have picked the correct answer. You have been awarded 3 points');
+                    Alert.alert('Congratulations', 'You Have picked the correct answer. You have been awarded 5 points');
                 }
             }
         }

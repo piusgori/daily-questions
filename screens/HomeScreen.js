@@ -9,7 +9,7 @@ import { QuestionsContext } from '../services/questions/questions-context';
 import LottieView from 'lottie-react-native';
 
 const HomeScreen = ({ navigation }) => {
-    const { questions, isLoading, errors, getQuestions } = useContext(QuestionsContext);
+    const { allQuestions, isLoading, errors, getQuestions } = useContext(QuestionsContext);
 
     const keyExtract = (item) => (item.id);
     const getItem = (data, index) => {return data[index]};
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
     const goToCategoriesHandler = () => { navigation.navigate('CategoriesTabScreen') };
     const topCategories = CATEGORIES.filter((category) => CATEGORIES.indexOf(category) < 5);
     const sortbyAttempts = (a, b) => {return parseInt(b.attempts) - parseInt(a.attempts);}
-    const popularQuestions = questions.sort(sortbyAttempts);
+    const popularQuestions = allQuestions.sort(sortbyAttempts);
 
     useEffect(() => {
         getQuestions();
@@ -49,19 +49,19 @@ const HomeScreen = ({ navigation }) => {
           <Title style={styles.title}>Popular Questions</Title>
           <View style={styles.questionsView}>
             {isLoading && <View style={styles.animationContainer}>
-                <LottieView style={styles.animation} autoPlay={true} loop={true} resizeMode='cover' key='animation' source={require('../assets/loading.json')}></LottieView>
-            </View>}
-                {!isLoading && questions.length === 0 && <Title>There are questions added yet</Title>}
-              {!isLoading && questions.length > 0 && <VirtualizedList
-                data={popularQuestions}
-                initialNumToRender={2}
-                keyExtractor={keyExtract}
-                renderItem={showQuestions}
-                getItemCount={data => data.length}
-                getItem={getItem}
-                showsVerticalScrollIndicator={false}
-              >
-              </VirtualizedList>}
+                    <LottieView style={styles.animation} autoPlay={true} loop={true} resizeMode='cover' key='animation' source={require('../assets/loading.json')}></LottieView>
+                </View>}
+                {!isLoading && <VirtualizedList
+                    data={popularQuestions}
+                    initialNumToRender={2}
+                    keyExtractor={keyExtract}
+                    renderItem={showQuestions}
+                    getItemCount={data => data.length}
+                    getItem={getItem}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={<Title>There are questions added yet</Title>}
+                >
+                </VirtualizedList>}
           </View>
       </View>
     </View>

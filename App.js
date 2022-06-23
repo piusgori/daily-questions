@@ -6,7 +6,6 @@ import { AuthenticationContextProvider } from './services/authentication/authent
 import OverallNavigation from './navigation/OverallNavigation';
 import { QuestionsContextProvider } from './services/questions/questions-context';
 
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     'anton': require('./assets/fonts/Anton-Regular.ttf'),

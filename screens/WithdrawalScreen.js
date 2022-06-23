@@ -2,10 +2,12 @@ import { View, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { Bar } from 'react-native-progress';
 import WebView from 'react-native-webview';
+import { loadInterstitial } from '../utils/adverts';
 
 
 
 const WithdrawalScreen = () => {
+    loadInterstitial();
     const [progress, setProgress] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 

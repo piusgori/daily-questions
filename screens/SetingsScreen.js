@@ -4,11 +4,13 @@ import { baseStyles } from '../utils/styles';
 import { Ionicons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import { AuthenticationContext } from '../services/authentication/authentication-context';
+import { loadInterstitial } from '../utils/adverts';
 
 
 const SetingsScreen = ({ navigation }) => {
   const authenticationContext = useContext(AuthenticationContext);
   const { logoutHandler } = authenticationContext;
+  loadInterstitial();
 
   const goToHomeHandler = () => {navigation.navigate('HomeTabScreen')}
   const goToProfileHandler = () => {navigation.navigate('Profile')}

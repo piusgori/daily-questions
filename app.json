@@ -2,9 +2,9 @@
   "expo": {
     "name": "Intelligain: Answer Questions Gain Cash",
     "slug": "intelligain-answer-questions-gain-cash",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/main-logo-icon.png",
+    "icon": "./assets/top-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/logo-icon.png",
@@ -21,10 +21,15 @@
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-4863502861257960~2377986752"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/main-logo-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.intelligain",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"

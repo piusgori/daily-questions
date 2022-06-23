@@ -5,17 +5,19 @@ import Card from '../components/Card';
 import Title from '../components/Title';
 import { QuestionsContext } from '../services/questions/questions-context';
 import LottieView from 'lottie-react-native';
+import { loadInterstitial } from '../utils/adverts';
 
 const CategoryQuestionsScreen = ({ route }) => {
+  loadInterstitial();
   const navigation = useNavigation();
-  const { isLoading, getQuestions, errors, questions } = useContext(QuestionsContext);
+  const { isLoading, getQuestionsOfEachCategory, isQuestionsEmpty, questions } = useContext(QuestionsContext);
 
   useLayoutEffect(() => {
     navigation.setOptions({title: route.params.categoryName});
-    getQuestions();
+    getQuestionsOfEachCategory(route.params.categoryName);
+
   }, []);
 
-  const categoryQuestions = questions.filter((question) => question.category === route.params.categoryName);
   const getItem = (data, index) => {return data[index]};
   const keyExtract = (item) => (item.id);
   const showQuestions = (itemData) => (<Card question={itemData.item}></Card>);
@@ -25,9 +27,10 @@ const CategoryQuestionsScreen = ({ route }) => {
       {isLoading && <View style={styles.animationContainer}>
           <LottieView style={styles.animation} autoPlay={true} loop={true} resizeMode='cover' key='animation' source={require('../assets/loading.json')}></LottieView>
       </View>}
-      {!isLoading && categoryQuestions.length === 0 && <Title>There are no questions for this category yet</Title>}
-      {!isLoading && categoryQuestions.length > 0 && <VirtualizedList
-        data={categoryQuestions}
+      {!isLoading && questions.length === 0 && isQuestionsEmpty && <Title>There are no questions for this category yet</Title>}
+      {!isLoading && !isQuestionsEmpty && questions.length === 0 && <Title>You have already answered all the questions in this category. We'll add some more soon!</Title>}
+      {!isLoading && questions.length > 0 && !isQuestionsEmpty && <VirtualizedList
+        data={questions}
         initialNumToRender={2}
         keyExtractor={keyExtract}
         renderItem={showQuestions}
