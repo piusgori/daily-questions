@@ -12,7 +12,7 @@ const AboutScreen = () => {
       <Text style={[styles.text, styles.textMargin]}>2. You can only attempt a question once. If you provide the wrong answer you will not be awarded</Text>
       <Text style={[styles.text, styles.textMargin]}>3. The points awarded can be withdrawn. $1 is equivalent to 1000 points. However, withdrawal request cannot be made until you have a minimum of 5000 points</Text>
       <Text style={[styles.text, styles.textMargin]}>4. Withdrawal requests are made via paypal. therefore, it is required that you have a paypal account for you to request withdrawal</Text>
-      <Text style={[styles.text, styles.textMargin]}>5. While making a withdrawal request, you will be redirected to the paypal request withdrawal page where you will request the from <Title>kevinmiyaki91@gmail.com</Title> and the amount is the equivalent to the points you have earned. Your request will be reviewed for up to 12 hours</Text>
+      <Text style={[styles.text, styles.textMargin]}>5. While making a withdrawal request, you will be redirected to the paypal request withdrawal page where you will request the from <Title>dbstudioinc@gmail.com</Title> and the amount is the equivalent to the points you have earned. Your request will be reviewed for up to 12 hours</Text>
       <Text style={[styles.text, styles.textMargin]}>6. Notice that if you enter the wrong email and/or amount you will lose all you points besides not getting rewarded.</Text>
       <Text style={[styles.text, styles.textMargin]}>7. Once you make a request your points and questions are reset.</Text>
     </View>

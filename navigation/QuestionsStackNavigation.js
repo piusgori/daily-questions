@@ -9,7 +9,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import WithdrawalScreen from '../screens/WithdrawalScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ExitApp from '../utils/exit-app';
-import { BannerAd, loadRewarded } from '../utils/adverts';
+import { loadRewarded } from '../utils/adverts';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +23,6 @@ const QuestionsStackNavigation = () => {
         <Stack.Navigator
           screenOptions={{
             headerTitleStyle: {fontFamily: 'lobster', fontSize: 24},
-            headerRight: () => <BannerAd></BannerAd>
           }}
         >
             <Stack.Screen

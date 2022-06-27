@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Title from '../components/Title';
 import { QuestionsContext } from '../services/questions/questions-context';
 import LottieView from 'lottie-react-native';
-import { loadInterstitial } from '../utils/adverts';
+import { BannerAd, loadInterstitial } from '../utils/adverts';
 
 const CategoryQuestionsScreen = ({ route }) => {
   loadInterstitial();
@@ -37,6 +37,8 @@ const CategoryQuestionsScreen = ({ route }) => {
         getItemCount={data => data.length}
         getItem={getItem}
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={<BannerAd></BannerAd>}
+        ListFooterComponent={<BannerAd></BannerAd>}
       ></VirtualizedList>}
     </View>
   )

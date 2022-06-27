@@ -7,9 +7,10 @@ import Card from '../components/Card';
 import { baseStyles } from '../utils/styles';
 import { QuestionsContext } from '../services/questions/questions-context';
 import LottieView from 'lottie-react-native';
+import { BannerAd } from '../utils/adverts';
 
 const HomeScreen = ({ navigation }) => {
-    const { allQuestions, isLoading, errors, getQuestions } = useContext(QuestionsContext);
+    const { allQuestions, isLoading, errors, getQuestionsOfEachCategory } = useContext(QuestionsContext);
 
     const keyExtract = (item) => (item.id);
     const getItem = (data, index) => {return data[index]};
@@ -20,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
     const popularQuestions = allQuestions.sort(sortbyAttempts);
 
     useEffect(() => {
-        getQuestions();
+        getQuestionsOfEachCategory();
     }, [])
 
 
@@ -60,6 +61,7 @@ const HomeScreen = ({ navigation }) => {
                     getItem={getItem}
                     showsVerticalScrollIndicator={false}
                     ListEmptyComponent={<Title>There are questions added yet</Title>}
+                    ListHeaderComponent={<BannerAd></BannerAd>}
                 >
                 </VirtualizedList>}
           </View>
